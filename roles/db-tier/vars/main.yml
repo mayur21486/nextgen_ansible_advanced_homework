@@ -1,6 +1,5 @@
 ---
 # vars file for roles/postgres
----
 postgres_users:
   - name: appuser
     password: redhat
