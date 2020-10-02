@@ -8,20 +8,6 @@
     register: openstack_info
     tags:
       - osp.smoke
-  - name: Check the instances status 
-    wait_for:
-      host: "{{ item.public_v4 }}"
-      port: 22
-      search_regex: OpenSSH
-      timeout: 600
-    delegate_to: localhost
-    with_items:
-      - "{{ openstack_info.openstack_servers }}"
-    when: "'winrm' not in ansible_connection"
-    tags:
-     - "Check system up status"
-
-
 
   - name: Curl website
     uri:
