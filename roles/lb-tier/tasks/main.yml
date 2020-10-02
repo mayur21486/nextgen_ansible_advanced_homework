@@ -4,15 +4,20 @@
     name: "{{ load_balancer_packages }}"
     state: present
 
+- name Enable load_balancer at boot
+  service:
+    name: "{{ payload }}"
+    enabled: yes
+
 - name: Configure haproxy load balancing
   template:
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
-  notify: restart_haproxy
+  notify: restart "{{ payload }}'
 
 - name: Enable Haproxy
   service:
-    name: haproxy
+    name: "{{ payload }}"
     state: started
     enabled: true
 
